@@ -1,0 +1,63 @@
+# Model Configuration
+model:
+  image_channels: 3
+  sequence_length: 24
+  sequence_features: 10
+  hidden_dim: 128
+  num_heads: 4
+  num_layers: 2
+  dropout: 0.1
+
+# Training Configuration
+training:
+  learning_rate: 0.001
+  weight_decay: 1e-5
+  batch_size: 32
+  num_epochs: 100
+  log_interval: 10
+  early_stopping_patience: 10
+  validation_split: 0.2
+
+# Data Configuration
+data:
+  noaa_data_path: "data/noaa_storm_events.csv"
+  satellite_data_path: "data/satellite_imagery/"
+  image_size: [224, 224]
+  sequence_window: 24
+  train_test_split: 0.8
+
+# AWS Configuration
+aws:
+  region: "us-east-1"
+  s3_bucket: "storm-predictor-models"
+  role_arn: "arn:aws:iam::YOUR_ACCOUNT_ID:role/SageMakerRole"
+  instance_type: "ml.p3.2xlarge"
+  instance_count: 1
+
+# SageMaker Configuration
+sagemaker:
+  framework_version: "1.12.1"
+  py_version: "py38"
+  hyperparameter_tuning:
+    max_jobs: 20
+    max_parallel_jobs: 4
+    objective_metric: "validation:loss"
+    strategy: "Bayesian"
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "auc_roc"
+    - "brier_score"
+  threshold: 0.5
+  calibration_bins: 10
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/storm_predictor.log" 
