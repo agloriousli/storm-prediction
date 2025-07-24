@@ -30,7 +30,7 @@ A deep learning model that predicts the likelihood of storm events using histori
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/storm-predictor.git
+git clone https://github.com/agloriousli/storm-prediction
 cd storm-predictor
 ```
 
